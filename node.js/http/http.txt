@@ -1,2 +1,4 @@
 In php, we don't make any server. we run apachi server at xammp and connect with htdocs
 
+- request is readable stream.
+- respons is writeable stream.

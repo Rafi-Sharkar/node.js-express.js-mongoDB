@@ -1,6 +1,6 @@
 const http = require('http')
 
-// this server object is event emitter.
+// this server object is event emitter. -> request is readable stream. -> respons is writeable stream.
 const server = http.createServer((req, res)=>{
     if(req.url ==='/'){
         res.write("hellow, Rafi Sharkar\n");
