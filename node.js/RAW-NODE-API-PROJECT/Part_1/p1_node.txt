@@ -1,0 +1,20 @@
+In this part_1::
+    --> RESTFulAPI
+    --> Authentication & Authorization
+    --> User Signup & Add/Edit Settings
+    --> SMS Notification using Twilio RESTFulAPI
+    --> RAW Node.js, no npm modules
+    
+
+*** SetUp we need postman extension to test API URL ***
+
+Project name: Uptime monitoring API.
+
+Requirement Analysis::
+    1. Start the API Server.
+    2. Creare, Edit, Delete User
+    3. Token based authentication
+    4. Logout Mechanism
+    5. Set link & Up/Down
+    6. Edit/Delete link & rate limit
+    7. Check up/down time

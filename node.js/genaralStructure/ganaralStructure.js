@@ -6,8 +6,8 @@ Date: 24/11/24
 */
 
 // Dependencies
-const mathLibrary = require('./lib/math')
-const quotesLibrary = require('./lib/quotes')
+const mathLibrary = require('../node_modules/lib')
+const quotesLibrary = require('../node_modules/lib')
 
 // App object - Module scaffolding
 const app = {}
