@@ -1,0 +1,18 @@
+Mejor task___
+    --> RestFul API
+    --> Authentication & Authorization
+    --> User Signup & Add/Edit Settings
+    --> SMS Notification using Twilio API
+    --> RAW Node.js, no npm modules
+
+Requirement Analysis___
+    --> Start the API Server
+    --> Create, Edit, Delete User
+    --> Token based Authentication
+    --> Logout Mechanism
+    --> Set links & Up/Down
+    --> Edit/Delete links & rate limit
+    --> Check Up/Down time
+
+DataBase___
+    --> file system link json
