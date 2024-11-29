@@ -45,27 +45,30 @@ handler.handleReqRes = (req, res) => {
 
         // choosenHandler
         const choosenHandler = routes[trimedPath]? routes[trimedPath]: notFoundHandler;
-        choosenHandler(requestProperties, (statusCode, payLoad)=>{
-            statusCode = typeof(statusCode) === 'number'? statusCode : 500;
-            payLoad = typeof(payLoad) === 'object'? payLoad : {};
-            
-            // make payload as string
-            const payLoadString = JSON.stringify(payLoad)
-
-            // return the final response
-            res.writeHead(statusCode)
-            res.end(payLoadString)
-        })
 
         // this body is called payload, and frontend
         const decoder = new StringDecoder('utf-8')      // create a object of StringDecoder
         let realData = ''   // store all buffer string in realData
+
         req.on('data', (buffer)=>{
             realData += decoder.write(buffer)
         })
+
         req.on('end', ()=>{
             realData += decoder.end() //The stringDecoder.end() method is used to return all the remaining input stored in the internal buffer as a string. 
-            console.log(realData)
+            
+            choosenHandler(requestProperties, (statusCode, payLoad)=>{
+                statusCode = typeof(statusCode) === 'number'? statusCode : 500;
+                payLoad = typeof(payLoad) === 'object'? payLoad : {};
+                
+                // make payload as string
+                const payLoadString = JSON.stringify(payLoad)
+    
+                // return the final response
+                res.writeHead(statusCode)
+                res.end(payLoadString)
+            })
+
             res.end("hay, lamiya baby.")
         })
 
