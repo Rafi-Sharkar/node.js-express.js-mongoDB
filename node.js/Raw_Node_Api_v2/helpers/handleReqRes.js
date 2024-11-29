@@ -8,6 +8,8 @@
 // dependencies
 const url = require('url')
 const { StringDecoder } = require('string_decoder')  // we take a class StringDecoder from string_decoder module
+const routes = require('../routes')
+const { notFoundHandler } = require('../handlers/routeHandlers/notFoundHandler')
 
 
 // nodule scaffolding
@@ -30,6 +32,31 @@ handler.handleReqRes = (req, res) => {
         const queryStringObject = parseUrl.query
         // header means request matadata
         const headerObject = req.headers
+
+        // create an object where all property exist
+        const requestProperties = {
+            parseUrl,
+            path,
+            trimedPath,
+            method,
+            queryStringObject,
+            headerObject
+        }
+
+        // choosenHandler
+        const choosenHandler = routes[trimedPath]? routes[trimedPath]: notFoundHandler;
+        choosenHandler(requestProperties, (statusCode, payLoad)=>{
+            statusCode = typeof(statusCode) === 'number'? statusCode : 500;
+            payLoad = typeof(payLoad) === 'object'? payLoad : {};
+            
+            // make payload as string
+            const payLoadString = JSON.stringify(payLoad)
+
+            // return the final response
+            res.writeHead(statusCode)
+            res.end(payLoadString)
+        })
+
         // this body is called payload, and frontend
         const decoder = new StringDecoder('utf-8')      // create a object of StringDecoder
         let realData = ''   // store all buffer string in realData
@@ -45,7 +72,7 @@ handler.handleReqRes = (req, res) => {
         
 
     // response handling
-    res.end("Respose Null")
+    
     
 
     }

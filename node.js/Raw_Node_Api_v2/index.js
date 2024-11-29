@@ -19,15 +19,10 @@ app.config = {
 
 // create server and listering that server at "app.config.port" or 3000 port 
 app.createServer = () => {
-    const server = http.createServer(app.handleReqRes);
+    const server = http.createServer(handleReqRes);
     server.listen(app.config.prot, ()=>{
         console.log(`listen to port ${app.config.prot}`)
     })
 }
-
-
-
-
-
 
 app.createServer()
