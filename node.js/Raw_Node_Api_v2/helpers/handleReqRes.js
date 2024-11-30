@@ -10,6 +10,7 @@ const url = require('url')
 const { StringDecoder } = require('string_decoder')  // we take a class StringDecoder from string_decoder module
 const routes = require('../routes')
 const { notFoundHandler } = require('../handlers/routeHandlers/notFoundHandler')
+const { parseJSON } = require('./utilities')
 
 
 // nodule scaffolding
@@ -42,7 +43,8 @@ handler.handleReqRes = (req, res) => {
             queryStringObject,
             headerObject
         }
-
+        
+       
         // choosenHandler
         const choosenHandler = routes[trimedPath]? routes[trimedPath]: notFoundHandler;
 
@@ -57,6 +59,8 @@ handler.handleReqRes = (req, res) => {
         req.on('end', ()=>{
             realData += decoder.end() //The stringDecoder.end() method is used to return all the remaining input stored in the internal buffer as a string. 
             
+            requestProperties.body = parseJSON(realData)  // not understand how it work??????????
+
             choosenHandler(requestProperties, (statusCode, payLoad)=>{
                 statusCode = typeof(statusCode) === 'number'? statusCode : 500;
                 payLoad = typeof(payLoad) === 'object'? payLoad : {};
@@ -69,7 +73,7 @@ handler.handleReqRes = (req, res) => {
                 res.end(payLoadString)
             })
 
-            res.end("hay, lamiya baby.")
+            // res.end("hay, lamiya baby.")
         })
 
         

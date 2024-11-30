@@ -44,14 +44,12 @@ lib.create = (dir, file, data, callBack) => {
     })
 }
 
-
 // read data from file
 lib.read = (dir, file, callBack) => {
     fs.readFile(`${lib.basedir+dir}/${file}.json`, 'utf-8', (err, data)=>{
         callBack(err, data)
     })
 }
-
 
 // update existing file
 lib.update = (dir, file, data, callBack) => {

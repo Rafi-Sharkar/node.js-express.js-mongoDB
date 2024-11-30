@@ -7,18 +7,18 @@
 
 // dependencies
 const http = require('http')
-const { handleReqRes } = require('./helpers/handleReqRes')
+const {handleReqRes} = require('./helpers/handleReqRes')
 const environment = require('./helpers/environments')
 const data = require('./lib/data')
-const { result } = require('lodash')
 
 // app object - module scaffolding
 const app = {}
 
+/*
 // testing CRUD
 // test create file with data
 data.create('test', 'newFile', {name: 'Rafi Sharkar', age: 23, university: 'IUB', depertment: 'CSE'}, (err)=>{
-    console.log(`error was `, err)
+    console.log(`error was `, err) 
 })
 
 //test read file data
@@ -35,14 +35,17 @@ data.update('test', 'newFile', {name: "Hasan Al Banna", age: 23,university:"IUB"
 data.delete('test', 'newFile', (err)=>{
     console.log(err)
 })
+*/
 
+// 
 
 // create server and listering that server at "app.config.port" or 3000 port 
 app.createServer = () => {
     const server = http.createServer(handleReqRes);
-    server.listen(environment.prot, ()=>{
+    server.listen(environment.port, ()=>{
         console.log(`listen to port ${environment.port}`)
     })
 }
+
 
 app.createServer()
