@@ -7,7 +7,8 @@
 
 // dependencies
 const crypto = require('crypto')
-const encironment = require('./environments')
+const encironment = require('./environments');
+const { flatMap } = require('lodash');
 
 // module scaffolding
 const utilities = {}
@@ -31,6 +32,22 @@ utilities.hash = (strPass) => {
         .update(strPass)
         .digest('hex')
         return hash
+    }
+    return false
+}
+
+// create random string
+utilities.createRandomStr = (strLen) => {
+    let len = typeof(strLen)==='number' && strLen>0 ? strLen: false;
+
+    if(len){
+        const possibleChar = 'abcdefghijklmnopqrstuvwxyz0123456789'
+        let output = ''
+        for(let i=1; i<=len; i+=1){
+            const randomChar = possibleChar.charAt(Math.floor(Math.random() * possibleChar.length))
+            output += randomChar;
+        }
+        return output
     }
     return false
 }
