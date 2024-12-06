@@ -1,0 +1,4 @@
+Express.js work on some spacific task link
+    --> app
+    --> req, res
+    --> routing
