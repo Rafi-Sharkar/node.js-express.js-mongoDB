@@ -13,17 +13,21 @@ app.get('/', (req,res)=>{
     res.send("This is Public dashboard")
 })
 
+//  call parent of parant app
+admin.on('mount',(parent)=>{
+    console.log('Admin Mounted')
+    console.log(parent) // refers to the parent app
+  })
+
 app.use('/admin', admin)
 admin.get('/',(req,res)=>{
     console.log(admin.mountpath)
+
     res.send("This is admin dashboard")
 })
+  
 
 app.listen(app.locals.port,()=>{
     console.log(app.locals.title)
     console.log(`Server start at ${app.locals.port}`)
-})
-
-admin.listen(5000, ()=>{
-    console.log('Server run on prot 5000')  
 })
