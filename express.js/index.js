@@ -1,45 +1,29 @@
 const express = require('express')
 
 const app = express()
+const admin = express()
 
-//  read body data in post method. there have 4type:: 1. row, json, text, urlencoded. we don't need to do buffer handle in this case.
-// app.use(express.json())
-// app.use(express.text())
-// app.use(express.urlencoded())
+// app.locals is local variables within the application. which we can use entire application.
+app.locals.title = "My app"
+app.locals.port = 3000
 
-// make a particular diractory as static diractory.Here public is static diractory.
-// app.use(express.static(__dirname+'/public/',{index:'home.html'}))   // index: when call by dir then by default return this file
-
-// we can use express.Router() to route url.
-const router = express.Router({
-    caseSensitive: true
-})     // by default router is not case-Sensitive
-app.use(router)
-
-router.get('/',(req, res)=>{
-    res.send("Hellow, this is get method. by router")
-})
-router.get('/HOme',(req,res)=>{
-    res.send("this, is home directory")
+// routing
+app.get('/', (req,res)=>{
+    console.log(app.mountpath)      // return the path where this app is mount
+    res.send("This is Public dashboard")
 })
 
-/*
-// When we use get, post, put, delete method using app
-app.get('/',(req,res)=>{
-    res.send('This is home page to GET')
+app.use('/admin', admin)
+admin.get('/',(req,res)=>{
+    console.log(admin.mountpath)
+    res.send("This is admin dashboard")
 })
-app.post('/',(req,res)=>{
-    console.log(req.body)
-    res.send('This is home page to POST')
-})
-app.put('/',(req,res)=>{
-    res.send('This is home page to PUT')
-})
-app.delete('/',(req,res)=>{
-    res.send('This is home page DELETE')
-})
-*/
 
-app.listen(5000, ()=>{
-    console.log("Server start at 5000 port")
+app.listen(app.locals.port,()=>{
+    console.log(app.locals.title)
+    console.log(`Server start at ${app.locals.port}`)
+})
+
+admin.listen(5000, ()=>{
+    console.log('Server run on prot 5000')  
 })
