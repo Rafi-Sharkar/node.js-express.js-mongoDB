@@ -9,3 +9,6 @@ adminRouter.get('/', (req, res)=>{
 adminRouter.get('/login', (req, res)=> {
     res.send("login")
 })
+
+
+module.exports = adminRouter
